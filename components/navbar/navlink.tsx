@@ -92,7 +92,7 @@ const Navlink = () => {
                   My Reservation
                 </Link>
               </li>
-              {session.user?.role === "admin" && (
+              {session.user.role === "admin" && (
                 <>
                   <li>
                     <Link
