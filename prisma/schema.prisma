@@ -26,7 +26,7 @@ model Amenities {
   name           String
   createdAt      DateTime        @default(now())
   updatedAt      DateTime        @updatedAt
-  RooomAmenities RoomAmenities[]
+  RoomAmenities RoomAmenities[]
 }
 
 model RoomAmenities {
