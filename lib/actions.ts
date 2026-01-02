@@ -2,51 +2,60 @@
 
 import { prisma } from "@/lib/prisma";
 import { ContactSchema, RoomSchema } from "@/lib/zod";
-import { redirect} from "next/navigation";
+import { redirect } from "next/navigation";
+import { del } from "@vercel/blob";
+import { revalidatePath } from "next/cache";
 
-export const saveRoom = async (image: string, prevState: unknown, formData: FormData) =>{
-  if (!image) return {message: "Image is required"};
-  
+export const saveRoom = async (
+  image: string,
+  prevState: unknown,
+  formData: FormData
+) => {
+  if (!image) return { message: "Image is required" };
+
   const rawData = {
-    name : formData.get("name"),
-    description : formData.get("description"),
-    capacity : formData.get("capacity"),
-    price : formData.get("price"),
-    amenities : formData.getAll("amenities"),
+    name: formData.get("name"),
+    description: formData.get("description"),
+    capacity: formData.get("capacity"),
+    price: formData.get("price"),
+    amenities: formData.getAll("amenities"),
   };
 
   const validatedFields = RoomSchema.safeParse(rawData);
-  if(!validatedFields.success){
+  if (!validatedFields.success) {
     return { error: validatedFields.error.flatten().fieldErrors };
   }
 
-  const {name, description, capacity, price, amenities} = validatedFields.data;
+  const { name, description, capacity, price, amenities } =
+    validatedFields.data;
 
   try {
     await prisma.room.create({
-      data:{
+      data: {
         name,
         description,
         capacity,
         price,
         image,
-        RoomAmenities:{
-          createMany:{
-            data : amenities.map((item)=>({
-              amenitiesId: item
-            }))
-          }
-        }
-      }
-    })
+        RoomAmenities: {
+          createMany: {
+            data: amenities.map((item) => ({
+              amenitiesId: item,
+            })),
+          },
+        },
+      },
+    });
   } catch (error) {
     console.log(error);
   }
   redirect("/admin/room");
-}
+};
 
-
-export const ContactMessage = async (prevState:unknown, formData: FormData) => {
+export const ContactMessage = async (
+  prevState: unknown,
+  formData: FormData
+) => {
   const validatedFields = ContactSchema.safeParse(
     Object.fromEntries(formData.entries())
   );
@@ -71,4 +80,17 @@ export const ContactMessage = async (prevState:unknown, formData: FormData) => {
   } catch (error) {
     console.log(error);
   }
+};
+
+//Delete Room
+export const deleteRoom = async (id: string, image: string) => {
+  try {
+    await del(image);
+    await prisma.room.delete({
+      where: { id },
+    });
+  } catch (error) {
+    console.log(error);
+  }
+  revalidatePath("/admin/room");
 };
