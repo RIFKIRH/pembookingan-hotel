@@ -94,3 +94,57 @@ export const deleteRoom = async (id: string, image: string) => {
   }
   revalidatePath("/admin/room");
 };
+
+//update Room
+export const updateRoom = async (
+  image: string,
+  roomId: string,
+  prevState: unknown,
+  formData: FormData
+) => {
+  if (!image) return { message: "Image is required" };
+
+  const rawData = {
+    name: formData.get("name"),
+    description: formData.get("description"),
+    capacity: formData.get("capacity"),
+    price: formData.get("price"),
+    amenities: formData.getAll("amenities"),
+  };
+
+  const validatedFields = RoomSchema.safeParse(rawData);
+  if (!validatedFields.success) {
+    return { error: validatedFields.error.flatten().fieldErrors };
+  }
+
+  const { name, description, capacity, price, amenities } =
+    validatedFields.data;
+
+  try {
+    await prisma.$transaction([
+      prisma.room.update({
+        where: { id: roomId },
+        data: {
+          name,
+          description,
+          image,
+          price,
+          capacity,
+          RoomAmenities: {
+            deleteMany: {},
+          },
+        },
+      }),
+      prisma.roomAmenities.createMany({
+        data: amenities.map((item) => ({
+          roomId,
+          amenitiesId: item,
+        })),
+      }),
+    ]);
+  } catch (error) {
+    console.log(error);
+  }
+  revalidatePath("/admin/room");
+  redirect("/admin/room");
+};

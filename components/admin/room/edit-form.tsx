@@ -2,7 +2,7 @@
 
 import { useRef, useState, useTransition } from "react";
 import { useActionState } from "react";
-import { saveRoom } from "@/lib/actions";
+import { updateRoom } from "@/lib/actions";
 import { IoCloudUploadOutline, IoTrashOutline } from "react-icons/io5";
 import { type PutBlobResult } from "@vercel/blob";
 import Image from "next/image";
@@ -20,31 +20,16 @@ const EditForm = ({
 }) => {
   const inputFileRef = useRef<HTMLInputElement>(null);
 
-  /**
-   * =========================
-   * IMAGE STATE (FIX UTAMA)
-   * =========================
-   */
   const [image, setImage] = useState<string>(room.image ?? "");
   const [message, setMessage] = useState("");
   const [pending, startTransition] = useTransition();
 
-  /**
-   * =========================
-   * VALID IMAGE CHECK
-   * =========================
-   */
   const isValidImageSrc =
     typeof image === "string" &&
     (image.startsWith("http://") ||
       image.startsWith("https://") ||
       image.startsWith("/"));
 
-  /**
-   * =========================
-   * UPLOAD IMAGE
-   * =========================
-   */
   const handleUpload = () => {
     if (!inputFileRef.current?.files) return;
     const file = inputFileRef.current.files[0];
@@ -75,11 +60,6 @@ const EditForm = ({
     });
   };
 
-  /**
-   * =========================
-   * DELETE IMAGE
-   * =========================
-   */
   const deleteImage = (imageUrl: string) => {
     startTransition(async () => {
       try {
@@ -93,27 +73,20 @@ const EditForm = ({
     });
   };
 
-  /**
-   * =========================
-   * FORM ACTION
-   * =========================
-   */
   const [state, formAction, isPending] = useActionState(
-    saveRoom.bind(null, image),
+    updateRoom.bind(null, image, room.id),
     null
   );
 
- const checkedAmenities = room.RoomAmenities.map(
-  (item: { amenitiesId: string }) => item.amenitiesId
-);
-
+  const checkedAmenities = room.RoomAmenities.map(
+    (item: { amenitiesId: string }) => item.amenitiesId
+  );
 
   return (
     <form action={formAction}>
       <div className="grid md:grid-cols-12 gap-5">
         {/* LEFT */}
         <div className="col-span-8 bg-white p-4">
-          {/* NAME */}
           <div className="mb-4">
             <input
               type="text"
@@ -122,12 +95,9 @@ const EditForm = ({
               className="py-2 px-4 rounded-sm border border-gray-400 w-full"
               placeholder="Room Name..."
             />
-            <span className="text-sm text-red-500">
-              {state?.error?.name}
-            </span>
+            <span className="text-sm text-red-500">{state?.error?.name}</span>
           </div>
 
-          {/* DESCRIPTION */}
           <div className="mb-4">
             <textarea
               name="description"
@@ -141,7 +111,6 @@ const EditForm = ({
             </span>
           </div>
 
-          {/* AMENITIES */}
           <div className="mb-4 grid md:grid-cols-3">
             {amenities.map((item) => (
               <div className="flex items-center mb-4" key={item.id}>
@@ -152,9 +121,7 @@ const EditForm = ({
                   defaultChecked={checkedAmenities.includes(item.id)}
                   className="w-4 h-4 text-blue-600 border-gray-300 rounded"
                 />
-                <label className="ms-2 text-sm capitalize">
-                  {item.name}
-                </label>
+                <label className="ms-2 text-sm capitalize">{item.name}</label>
               </div>
             ))}
             <span className="text-sm text-red-500">
@@ -168,29 +135,44 @@ const EditForm = ({
           {/* IMAGE */}
           <label
             htmlFor="input-file"
-            className="flex flex-col mb-4 items-center justify-center
+            className="relative group flex flex-col mb-4 items-center justify-center
               aspect-video border-2 border-dashed rounded-md cursor-pointer
-              bg-gray-50 relative"
+              bg-gray-50 overflow-hidden"
           >
-            {pending && <BarLoader />}
-
-            {isValidImageSrc && (
-              <button
-                type="button"
-                onClick={() => deleteImage(image)}
-                className="absolute top-1 right-1 bg-red-500 text-white p-1 rounded"
-              >
-                <IoTrashOutline />
-              </button>
+            {pending && (
+              <div className="absolute inset-0 flex items-center justify-center bg-white/60 z-20">
+                <BarLoader />
+              </div>
             )}
 
-            {!isValidImageSrc ? (
+            {isValidImageSrc ? (
+              <>
+                <button
+                  type="button"
+                  onClick={() => deleteImage(image)}
+                  className="
+                    absolute top-1 right-1 z-30
+                    bg-red-500 text-white p-1 rounded
+                    opacity-0 group-hover:opacity-100
+                    transition-opacity duration-200
+                  "
+                >
+                  <IoTrashOutline />
+                </button>
+
+                <Image
+                  src={image}
+                  alt="Room Image"
+                  width={640}
+                  height={360}
+                  className="absolute inset-0 aspect-video object-cover"
+                />
+              </>
+            ) : (
               <>
                 <IoCloudUploadOutline className="size-8 text-gray-500" />
                 <p className="text-sm font-bold">Select Image</p>
-                {message && (
-                  <p className="text-xs text-red-500">{message}</p>
-                )}
+                {message && <p className="text-xs text-red-500">{message}</p>}
                 <input
                   type="file"
                   ref={inputFileRef}
@@ -199,18 +181,9 @@ const EditForm = ({
                   className="hidden"
                 />
               </>
-            ) : (
-              <Image
-                src={image}
-                alt="Room Image"
-                width={640}
-                height={360}
-                className="absolute inset-0 object-cover rounded-md"
-              />
             )}
           </label>
 
-          {/* CAPACITY */}
           <div className="mb-4">
             <input
               type="number"
@@ -224,7 +197,6 @@ const EditForm = ({
             </span>
           </div>
 
-          {/* PRICE */}
           <div className="mb-4">
             <input
               type="number"
@@ -233,19 +205,15 @@ const EditForm = ({
               className="py-2 px-4 border w-full"
               placeholder="Price..."
             />
-            <span className="text-sm text-red-500">
-              {state?.error?.price}
-            </span>
+            <span className="text-sm text-red-500">{state?.error?.price}</span>
           </div>
 
-          {/* MESSAGE */}
           {state?.message && (
             <div className="mb-4 bg-red-100 p-2">
               <span className="text-sm">{state.message}</span>
             </div>
           )}
 
-          {/* SUBMIT */}
           <button
             type="submit"
             disabled={isPending}

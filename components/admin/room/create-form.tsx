@@ -161,7 +161,7 @@ const CreateForm = ({ amenities }: { amenities: Amenities[] }) => {
                 alt="image"
                 width={640}
                 height={360}
-                className="rounded-medium
+                className="rounded-m
                  absolute aspect-video object-cover"
               />
             )}
