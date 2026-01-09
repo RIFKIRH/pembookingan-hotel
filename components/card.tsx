@@ -28,7 +28,7 @@ const Card = ({ room }: { room: RoomProps }) => {
 
         <h4 className="text-2xl mb-7">
           <span className="font-semibold text-gray-600">
-            Rp {formatCurrency(room.price)}
+             {formatCurrency(room.price)}
           </span>
           <span className="text-gray-400 text-sm"> /Night</span>
         </h4>

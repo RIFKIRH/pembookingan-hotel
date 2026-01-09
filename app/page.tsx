@@ -13,6 +13,7 @@ export default function Home() {
             repellendus.
           </p>
         </div>
+        
         <Main />
       </div>
     </div>
