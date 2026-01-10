@@ -1,11 +1,25 @@
-export type RoomProps = {
-  id: string;
-  name: string;
-  description: string;
-  image: string;
-  price: number;
-  capacity: number;
-  RoomAmenities: {
-    amenitiesId: string;
-  }[];
-};
+import { Prisma } from "@prisma/client";
+
+export type RoomProps = Prisma.RoomGetPayload<{
+  include: {
+    RoomAmenities: {
+      select: {
+        amenitiesId: true;
+      };
+    };
+  };
+}>;
+
+export type getRoomDetailProps = Prisma.RoomGetPayload<{
+  include: {
+    RoomAmenities: {
+      include: {
+        Amenities: {
+          select: {
+            name: true;
+          };
+        };
+      };
+    };
+  };
+}>;
