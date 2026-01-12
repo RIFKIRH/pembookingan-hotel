@@ -4,10 +4,16 @@ import { addDays } from "date-fns";
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 import { createReserve } from "@/lib/actions";
-import { RoomDetailProps } from "@/types/room";
+import { RoomDetailProps, DisableDateProps } from "@/types/room";
 import clsx from "clsx";
 
-const ReserveForm = ({ room }: { room: RoomDetailProps }) => {
+const ReserveForm = ({
+  room,
+  disableDate,
+}: {
+  room: RoomDetailProps;
+  disableDate: DisableDateProps[];
+}) => {
   const StartDate = new Date();
   const EndDate = addDays(StartDate, 1);
 
@@ -25,6 +31,13 @@ const ReserveForm = ({ room }: { room: RoomDetailProps }) => {
     null
   );
 
+  const excludeDates = disableDate.map((item) => {
+    return {
+      start: item.startDate,
+      end: item.endDate,
+    };
+  });
+
   return (
     <div>
       <form action={formAction}>
@@ -39,6 +52,7 @@ const ReserveForm = ({ room }: { room: RoomDetailProps }) => {
             minDate={new Date()}
             selectsRange={true}
             onChange={handleDateChange}
+            excludeDateIntervals={excludeDates}
             dateFormat={"dd-MM-yyyy"}
             wrapperClassName="w-full"
             className="py-2 px-4 rounded-md border border-gray-300 w-full"
@@ -80,7 +94,7 @@ const ReserveForm = ({ room }: { room: RoomDetailProps }) => {
           className={clsx(
             "px-10 py-3 text-center font-semibold text-white w-full bg-orange-400 rounded-sm cursor-pointer hover:bg-orange-500",
             {
-              "opacity-50 cursor-progress": isPending,  
+              "opacity-50 cursor-progress": isPending,
             }
           )}
           disabled={isPending}

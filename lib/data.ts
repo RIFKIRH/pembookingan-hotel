@@ -91,3 +91,21 @@ export const getReservationById = async (id: string) => {
     console.log(error);
   }
 };
+
+export const getDisableRoomById = async (roomId: string) => {
+  try {
+    const result = await prisma.reservation.findMany({
+      select: {
+        startDate: true,
+        endDate: true,
+      },
+      where: {
+        roomId: roomId,
+        Payment: { status: { not: "failure" } },
+      },
+    });
+    return result;
+  } catch (error) {
+    console.log(error);
+  }
+};
