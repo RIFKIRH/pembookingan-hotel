@@ -20,11 +20,16 @@ const ReserveForm = ({
   const [startDate, setStartDate] = useState(StartDate);
   const [endDate, setEndDate] = useState(EndDate);
 
-  const handleDateChange = (dates: any) => {
-    const [start, end] = dates;
-    setStartDate(start);
-    setEndDate(end);
-  };
+  const handleDateChange = (
+  dates: [Date | null, Date | null] | null
+) => {
+  if (!dates) return;
+
+  const [start, end] = dates;
+  setStartDate(start ?? StartDate);
+  setEndDate(end ?? EndDate);
+};
+
 
   const [state, formAction, isPending] = useActionState(
     createReserve.bind(null, room.id, room.price, startDate, endDate),
