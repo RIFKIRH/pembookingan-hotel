@@ -76,7 +76,7 @@ const ContactForm = () => {
             "px-10 py-4 text-center font-semibold text-white w-full bg-orange-400 rounded-sm hover:bg-orange-500 cursor-pointer",
             {
               "opacity-50 cursor-progress animate-pulse": isPending,
-            }
+            },
           )}
           disabled={isPending}
         >

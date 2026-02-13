@@ -12,7 +12,7 @@ export async function middleware(request: NextRequest) {
   // 1️⃣ Belum login → redirect ke signin
   if (
     !isLoggedIn &&
-    protectedRoutes.some(route => pathname.startsWith(route))
+    protectedRoutes.some((route) => pathname.startsWith(route))
   ) {
     return NextResponse.redirect(new URL("/signin", request.url));
   }
@@ -23,11 +23,7 @@ export async function middleware(request: NextRequest) {
   }
 
   // 3️⃣ Non-admin akses /admin → ditolak
-  if (
-    isLoggedIn &&
-    role !== "admin" &&
-    pathname.startsWith("/admin")
-  ) {
+  if (isLoggedIn && role !== "admin" && pathname.startsWith("/admin")) {
     return NextResponse.redirect(new URL("/", request.url));
   }
 

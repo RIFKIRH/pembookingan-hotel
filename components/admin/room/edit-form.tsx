@@ -75,11 +75,11 @@ const EditForm = ({
 
   const [state, formAction, isPending] = useFormState(
     updateRoom.bind(null, image, room.id),
-    null
+    null,
   );
 
   const checkedAmenities = room.RoomAmenities.map(
-    (item: { amenitiesId: string }) => item.amenitiesId
+    (item: { amenitiesId: string }) => item.amenitiesId,
   );
 
   return (
@@ -219,7 +219,7 @@ const EditForm = ({
             disabled={isPending}
             className={clsx(
               "bg-orange-400 text-white w-full py-2.5 text-lg font-semibold",
-              { "opacity-50": isPending }
+              { "opacity-50": isPending },
             )}
           >
             {isPending ? "Updating..." : "Update"}

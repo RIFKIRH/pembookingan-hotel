@@ -53,7 +53,7 @@ const CreateForm = ({ amenities }: { amenities: Amenities[] }) => {
 
   const [state, formAction, isPending] = useFormState(
     saveRoom.bind(null, image),
-    null
+    null,
   );
 
   return (
@@ -208,7 +208,7 @@ const CreateForm = ({ amenities }: { amenities: Amenities[] }) => {
               "bg-orange-400 text-white w-full hover:bg-orange-500 py-2.5 px-6 md:px-10 text-lg font-semibold cursor-pointer",
               {
                 "opacity-50 cursor-progress": isPending,
-              }
+              },
             )}
             disabled={isPending}
           >

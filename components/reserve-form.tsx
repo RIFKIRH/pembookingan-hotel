@@ -29,7 +29,7 @@ const ReserveForm = ({
 
   const [state, formAction, isPending] = useFormState(
     createReserve.bind(null, room.id, room.price, startDate, endDate),
-    null
+    null,
   );
 
   const excludeDates = disableDate.map((item) => {
@@ -96,7 +96,7 @@ const ReserveForm = ({
             "px-10 py-3 text-center font-semibold text-white w-full bg-orange-400 rounded-sm cursor-pointer hover:bg-orange-500",
             {
               "opacity-50 cursor-progress": isPending,
-            }
+            },
           )}
           disabled={isPending}
         >
