@@ -7,7 +7,7 @@ import { IoCloudUploadOutline, IoTrashOutline } from "react-icons/io5";
 import { type PutBlobResult } from "@vercel/blob";
 import Image from "next/image";
 import { BarLoader } from "react-spinners";
-import type { Amenities } from "@/app/generated/prisma";
+import type { Amenities } from "@prisma/client";
 import type { RoomProps } from "@/types/room";
 import clsx from "clsx";
 
