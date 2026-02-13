@@ -10,9 +10,8 @@
     "postinstall": "prisma generate"
   },
   "dependencies": {
-    "@auth/core": "^0.41.0",
-    "@auth/prisma-adapter": "^2.11.1",
-    "@prisma/client": "^6.5.0",
+    "@auth/prisma-adapter": "^1.0.0",
+    "@prisma/client": "^6.19.2",
     "@vercel/blob": "^2.0.0",
     "clsx": "^2.1.1",
     "date-fns": "^4.1.0",
@@ -26,6 +25,9 @@
     "react-spinners": "^0.17.0",
     "zod": "^4.3.4"
   },
+  "overrides": {
+    "@auth/core": "0.34.2"
+  },
   "devDependencies": {
     "@tailwindcss/postcss": "^4",
     "@types/node": "^20",
@@ -33,7 +35,7 @@
     "@types/react-dom": "^19",
     "eslint": "^9",
     "eslint-config-next": "16.1.1",
-    "prisma": "^6.5.0",
+    "prisma": "^6.19.2",
     "tailwindcss": "^4",
     "typescript": "^5"
   }
