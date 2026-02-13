@@ -1,10 +1,10 @@
 "use client";
-import { useActionState } from "react";
+import { useFormState } from "react-dom";
 import { ContactMessage } from "@/lib/actions";
 import clsx from "clsx";
 
 const ContactForm = () => {
-  const [state, Formaction, isPending] = useActionState(ContactMessage, null);
+  const [state, Formaction, isPending] = useFormState(ContactMessage, null);
   return (
     <div className="bg-white p-8 rounded:sm shadow:sm">
       {state?.message ? (

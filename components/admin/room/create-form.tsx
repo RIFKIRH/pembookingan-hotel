@@ -1,6 +1,6 @@
 "use client";
 import { useRef, useState, useTransition } from "react";
-import { useActionState } from "react";
+import { useFormState } from "react-dom";
 import { saveRoom } from "@/lib/actions";
 import { IoCloudUploadOutline, IoTrashOutline } from "react-icons/io5";
 import { type PutBlobResult } from "@vercel/blob";
@@ -51,7 +51,7 @@ const CreateForm = ({ amenities }: { amenities: Amenities[] }) => {
     });
   };
 
-  const [state, formAction, isPending] = useActionState(
+  const [state, formAction, isPending] = useFormState(
     saveRoom.bind(null, image),
     null
   );

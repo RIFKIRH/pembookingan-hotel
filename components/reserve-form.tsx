@@ -1,5 +1,6 @@
 "use client";
-import { useState, useActionState } from "react";
+import { useState } from "react";
+import { useFormState } from "react-dom";
 import { addDays } from "date-fns";
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
@@ -26,7 +27,7 @@ const ReserveForm = ({
     setEndDate(end ?? EndDate);
   };
 
-  const [state, formAction, isPending] = useActionState(
+  const [state, formAction, isPending] = useFormState(
     createReserve.bind(null, room.id, room.price, startDate, endDate),
     null
   );
