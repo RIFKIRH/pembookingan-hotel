@@ -26,8 +26,10 @@ const ContactPage = () => {
               Get In Touch Today
             </h1>
             <p className="text-gray-700 py-5">
-              Lorem ipsum dolor sit amet consectetur, adipisicing elit.
-              Adipisci, est expedita tempora pariatur nisi libero.
+            Kami siap membantu setiap kebutuhan dan pertanyaan Anda dengan layanan yang cepat, profesional, dan penuh perhatian. Baik untuk reservasi, permintaan khusus, maupun informasi lebih lanjut mengenai fasilitas dan layanan kami, tim kami selalu tersedia untuk memastikan pengalaman Anda berjalan sempurna.
+             </p>
+            <p className="text-gray-700 py-5">
+            Silakan hubungi kami melalui telepon, email, atau kunjungi langsung properti kami. Kami menantikan kesempatan untuk menyambut Anda.
             </p>
             <ul className="list-item space-y-6 pt-8">
               <li className="flex gap-5">
@@ -54,7 +56,7 @@ const ContactPage = () => {
                 </div>
                 <div className="flex-1">
                   <h4 className="text-lg font-semibold mb-1">Address :</h4>
-                  <p>Abigamika Street Road 2025, PKU, INDONESIA</p>
+                  <p>Aurelia Grand Boulevard 88, Pekanbaru, INDONESIA</p>
                 </div>
               </li>
             </ul>
