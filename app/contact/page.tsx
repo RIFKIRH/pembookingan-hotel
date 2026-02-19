@@ -56,7 +56,7 @@ const ContactPage = () => {
                 </div>
                 <div className="flex-1">
                   <h4 className="text-lg font-semibold mb-1">Address :</h4>
-                  <p>Aurelia Grand Boulevard 88, Pekanbaru, INDONESIA</p>
+                  <p>Aurelia Grand Vista Hotel, Pekanbaru, INDONESIA</p>
                 </div>
               </li>
             </ul>
