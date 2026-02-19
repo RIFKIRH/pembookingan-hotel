@@ -18,9 +18,10 @@ const AboutPage = () => {
               Who We Are
             </h1>
             <p className="text-gray-700 py-5">
-              Lorem ipsum dolor sit amet consectetur adipisicing elit. Delectus
-              officia, ab voluptate eaque deleniti itaque sit nihil cupiditate
-              doloribus odio.
+              Kami adalah destinasi perhotelan mewah yang menghadirkan standar hospitality kelas dunia. Dengan perpaduan arsitektur elegan, desain interior berkelas, dan pelayanan yang dipersonalisasi, kami menciptakan pengalaman menginap yang melampaui ekspektasi.
+            </p>
+              <p className="text-gray-700 py-5">
+              Setiap ruang dirancang dengan presisi, setiap layanan diberikan dengan perhatian penuh terhadap detail, dan setiap tamu diperlakukan sebagai prioritas utama. Bagi kami, kemewahan bukan sekadar fasilitas — melainkan pengalaman yang terasa sejak langkah pertama Anda memasuki properti kami.
             </p>
             <ul className="list-item space-y-6 pt-8">
               <li className="flex gap-5">
@@ -30,8 +31,7 @@ const AboutPage = () => {
                 <div className="flex-1">
                   <h4 className="text-lg font-semibold mb-1">Vision :</h4>
                   <p className="text-gray-600">
-                    Lorem ipsum dolor sit, amet consectetur adipisicing elit.
-                    Enim expedita quod sed sapiente et delectus.
+                    Menjadi ikon perhotelan premium yang diakui secara internasional atas keunggulan layanan, keanggunan desain, dan pengalaman menginap yang eksklusif.
                   </p>
                 </div>
               </li>
@@ -42,9 +42,12 @@ const AboutPage = () => {
                 <div className="flex-1">
                   <h4 className="text-lg font-semibold mb-1">Mission :</h4>
                   <p className="text-gray-600">
-                    Lorem ipsum dolor sit amet consectetur, adipisicing elit.
-                    Maxime aperiam molestias amet ipsa dicta aspernatur!
-                    Laboriosam quos dignissimos quisquam perspiciatis!
+                    <ul>
+                    <li>Memberikan layanan personal yang elegan, profesional, dan berstandar global.</li>
+                    <li>Menyediakan fasilitas premium dengan kualitas terbaik di setiap aspek pengalaman tamu.</li>
+                    <li>Menghadirkan suasana yang memadukan kemewahan, kenyamanan, dan privasi.</li>
+                    <li>Menjaga komitmen terhadap inovasi, kualitas, dan kepuasan tamu yang berkelanjutan.</li>
+                    </ul>
                   </p>
                 </div>
               </li>
