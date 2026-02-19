@@ -8,7 +8,7 @@ const Navbar = () => {
         <div className="max-width-screen-xl mx-auto flex flex-wrap items-center justify-between p-4">
           <Link href="/">
             <Image
-              src="/logo.png"
+              src="/Aurelia Grand Vista Hotel.png"
               alt="Logo"
               width={128}
               height={49}
