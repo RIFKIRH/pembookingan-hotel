@@ -8,11 +8,10 @@ const Footer = () => {
         <div className="grid md:grid-cols-3 gap-7">
           <div>
             <Link href="/" className="mb-10 block">
-              <Image src="/logo.png" width={128} height={49} alt="logo" />
+              <Image src="/logo1.png" width={128} height={49} alt="logo" />
             </Link>
             <p className="text-gray-400 ">
-              Lorem ipsum dolor, sit amet consectetur adipisicing elit. Maxime
-              sint porro eum, sunt natus incidunt.
+              Kami menghadirkan pengalaman menginap premium dengan standar layanan internasional, memadukan desain elegan, kenyamanan modern, dan pelayanan personal yang penuh perhatian untuk setiap tamu.
             </p>
           </div>
           <div>
@@ -58,7 +57,7 @@ const Footer = () => {
               NewsLetter
             </h4>
             <p className="text-gray-400">
-              Lorem ipsum dolor sit amet consectetur adipisicing.
+              Dapatkan penawaran eksklusif, promo spesial, dan informasi terbaru seputar fasilitas serta layanan kami langsung ke email Anda.
             </p>
             <form action="" className="mt-5">
               <div className="mb-5">
