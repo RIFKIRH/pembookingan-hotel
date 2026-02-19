@@ -9,8 +9,7 @@ export default function Home() {
         <div className="text-center">
           <h1 className="text-4xl font-bold uppercase">Room & Rates</h1>
           <p className="py-3">
-            Lorem ipsum dolor sit amet consectetur adipisicing elit. Ut,
-            repellendus.
+            Temukan pilihan kamar premium dengan harga terbaik untuk kenyamanan maksimal Anda.
           </p>
         </div>
         
